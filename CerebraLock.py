@@ -93,17 +93,17 @@ def main():
 
         elif choice == "3":
             # Remove a password
-            service = input("Enter the service name to remove: ")
+            service_to_delete = input("Enter the service name to remove: ")
             passwords = load_passwords(key)
-            if service in passwords:
-                passwords.pop(service)
+            if service_to_delete in passwords:
+                passwords.pop(service_to_delete)
                 with open("storage.dat", "wb") as password_file:
-                    for service, (username, password) in passwords.items():
+                    for svc, (username, password) in passwords.items():
                         encrypted_password = encrypt_password(password, key)
-                        password_file.write(service.encode() + b":" + username.encode() + b":" + encrypted_password + b"\n")
-                print(f"Password for {service} removed.")
+                        password_file.write(svc.encode() + b":" + username.encode() + b":" + encrypted_password + b"\n")
+                print(f"Password for {service_to_delete} removed.")
             else:
-                print(f"No password found for {service}.")
+                print(f"No password found for {service_to_delete}.")
 
         elif choice == "4":
             print("Goodbye!")
