@@ -1,4 +1,5 @@
 import os
+import getpass
 from cryptography.fernet import Fernet
 
 # Function to generate a key for encryption if it doesn't exist
@@ -50,10 +51,10 @@ def load_passwords(key):
 
 def main():
     # Prompt for master password on start
-    master_password = input("Enter your master password to continue: ")
+    master_password = getpass.getpass("Enter your master password to continue: ")
 
     # Set the correct master password here
-    correct_master_password = "super_secret_password_here"
+    correct_master_password = "test"
 
     if master_password != correct_master_password:
         print("Incorrect password! Access denied.")
@@ -86,7 +87,7 @@ def main():
             # Add a password
             service = input("Enter the service name: ")
             username = input("Enter the username: ")
-            password = input("Enter the password: ")
+            password = getpass.getpass("Enter the password: ")
             encrypted_password = encrypt_password(password, key)
             save_password(service, username, encrypted_password)
             print(f"Password for {service} saved!")
